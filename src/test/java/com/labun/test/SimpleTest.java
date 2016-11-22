@@ -9,7 +9,6 @@ import ij.ImagePlus;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -22,6 +21,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class SimpleTest {
 
+    // Turn this to true to show points
     private static final boolean SHOW_POINTS_IN_WINDOW = false;
 
     @Test

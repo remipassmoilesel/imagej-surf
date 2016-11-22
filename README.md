@@ -13,6 +13,12 @@ SURF (Speeded up robust features) is a computer vision algorithm that allow to d
 
 It can be used to detect objects on pictures, or to stitch images between them.
 
+## Screenshot
+
+Example with this picture:
+
+![Screenshot](screenshot.jpg)
+
 ## How does it work ?
 
 You need to install Git and Maven, then to create a new project. On Ubuntu GNU/Linux:
@@ -82,3 +88,16 @@ After, you can use SURF algorithm like this:
            return imp;
            
         }
+        
+## Small test case
+
+There is a small test case in this project, were you can see ImageJ/Surf in action:
+ 
+    package com.labun.test;
+    
+    public class SimpleTest {
+           
+           private static final boolean SHOW_POINTS_IN_WINDOW = true;
+           
+           ...
+    }           
