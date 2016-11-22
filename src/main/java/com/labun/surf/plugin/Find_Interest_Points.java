@@ -1,4 +1,4 @@
-
+package com.labun.surf.plugin;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;

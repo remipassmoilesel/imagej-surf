@@ -1,4 +1,4 @@
-
+package com.labun.surf.plugin;
 import ij.IJ;
 import ij.io.OpenDialog;
 import ij.plugin.PlugIn;

@@ -1,4 +1,4 @@
-
+package com.labun.surf.plugin;
 import static ij.IJ.d2s;
 import ij.IJ;
 import ij.ImagePlus;
@@ -26,7 +26,7 @@ import com.labun.surf.Matcher.Point2Df;
 
 
 
-// Designed according to the "PlugIn Design Guidelines" 
+// Designed according to the "PlugIn Design Guidelines"
 // http://pacific.mpi-cbg.de/wiki/index.php/PlugIn_Design_Guidelines
 
 public class Compare_Images implements PlugIn {
@@ -34,7 +34,7 @@ public class Compare_Images implements PlugIn {
 
 	@Override
 	public void run(String arg) {
-		
+
 		// Get IDs of opened images.
 		int[] imageIDs = WindowManager.getIDList();
 		if (imageIDs == null || imageIDs.length < 2) {
@@ -42,10 +42,10 @@ public class Compare_Images implements PlugIn {
 					"Open these images in ImageJ.");
 			return;
 		}
-		
+
 		// Prepare list of opened images.
 		String[] images = new String[imageIDs.length];
-		for (int i = 0; i < imageIDs.length; i++) 
+		for (int i = 0; i < imageIDs.length; i++)
 			images[i] = WindowManager.getImage(imageIDs[i]).getTitle();
 
 		final GenericDialog gd = new GenericDialog( "Parameter" + " (" + title + ")" );
@@ -55,15 +55,15 @@ public class Compare_Images implements PlugIn {
 		gd.addCheckbox("Perform reverse comparison too (gives more accurate results)", true);
 		// ^ (even better should be the using of extended (128-dim.) descriptor)
 		gd.addCheckbox("Use homography matrix to check correctness (Open File dialog will be shown)", false);
-		
+
 		Params.addSurfParamsToDialog(gd);
 		gd.showDialog();
-		
+
 		if (gd.wasCanceled())
 			return;
-		
+
 		//////////////////////////////////////////////////////////////////////////
-		
+
 		ImagePlus image1 = WindowManager.getImage(gd.getNextChoice());
 		ImagePlus image2 = WindowManager.getImage(gd.getNextChoice());
 
@@ -75,11 +75,11 @@ public class Compare_Images implements PlugIn {
 			homography = loadHomographyMatrixFromFile();
 			if (homography==null) return;
 		}
-		
+
 		Params p1 = Params.getSurfParamsFromDialog(gd);
 		Params p2 = new Params(p1);
 		long begin, end;
-		
+
 		p1.getStatistics().startTime = new Date();
 		p1.getStatistics().imageTitle = image1.getTitle();
 		begin = System.currentTimeMillis();
@@ -95,7 +95,7 @@ public class Compare_Images implements PlugIn {
 		end = System.currentTimeMillis();
 		p2.getStatistics().timeIntegralImage = end - begin;
 		List<InterestPoint> ipts2 = IJFacade.detectAndDescribeInterestPoints(intImg2, p2);
-		
+
 		begin = System.currentTimeMillis();
 		Map<InterestPoint, InterestPoint> matchedPoints = Matcher.findMathes(ipts1, ipts2);
 		if (doReverseComparisonToo) {
@@ -104,36 +104,36 @@ public class Compare_Images implements PlugIn {
 		}
 		end = System.currentTimeMillis();
 		long timeMatcher = end - begin;
-		
+
 		if (matchedPoints.size() == 0) {
 			IJ.showMessage(title, "No matches found.");
 			return;
 		}
-		
-		
+
+
 		// Draw matched interest points:
-		
+
 		// 1) prepare a copy of image1
 		ImageProcessor image1ProcessorCopy = image1.getProcessor().duplicate().convertToRGB();
-		String image1NewTitle = String.format("%s: %d of %d Interest Points", 
+		String image1NewTitle = String.format("%s: %d of %d Interest Points",
 				image1.getTitle().split(":")[0], matchedPoints.size(), ipts1.size());
 		ImagePlus image1Copy = new ImagePlus(image1NewTitle, image1ProcessorCopy);
-		
+
 		// 2) prepare a copy of image2
 		ImageProcessor imageProcessor2Copy = image2.getProcessor().duplicate().convertToRGB();
-		String image2NewTitle = String.format("%s: %d of %d Interest Points", 
+		String image2NewTitle = String.format("%s: %d of %d Interest Points",
 				image2.getTitle().split(":")[0], matchedPoints.size(), ipts2.size());
 		ImagePlus image2Copy = new ImagePlus(image2NewTitle, imageProcessor2Copy);
-		
+
 		for (Entry<InterestPoint, InterestPoint> pair : matchedPoints.entrySet()) {
 			IJFacade.drawSingleInterestPoint(image1ProcessorCopy, p1, pair.getKey());
 			IJFacade.drawSingleInterestPoint(imageProcessor2Copy, p2, pair.getValue());
 		}
-		
+
 		image1Copy.show();
 		image2Copy.show();
-		
-		
+
+
 		if (p1.isDisplayStatistics() || p2.isDisplayStatistics()) {
 			IJFacade.initializeStatisticsWindow();
 			if (p1.isDisplayStatistics())
@@ -142,7 +142,7 @@ public class Compare_Images implements PlugIn {
 				IJFacade.displayStatistics(p2);
 			IJ.write("");
 			IJ.write("Matcher:\t"+timeMatcher);
-			
+
 		}
 
 		if (useHomography) {
@@ -160,13 +160,13 @@ public class Compare_Images implements PlugIn {
 				ip1 = pair.getKey();
 				ip2 = pair.getValue();
 				ip2H = Matcher.getTargetPointByHomography(new Point2Df(ip1.x, ip1.y), homography);
-				IJ.write(d2s(ip1.x) + "\t" + d2s(ip1.y) + "\t" + d2s(ip2H.x) + "\t" + d2s(ip2H.y) + "\t" 
+				IJ.write(d2s(ip1.x) + "\t" + d2s(ip1.y) + "\t" + d2s(ip2H.x) + "\t" + d2s(ip2H.y) + "\t"
 						+ d2s(ip2.x) + "\t" + d2s(ip2.y) + "\t" + d2s(ip2.x-ip2H.x) + "\t" + d2s(ip2.y-ip2H.y));
 				i++;
 			}
 
 		}
-			
+
 	}
 
 	/** Return a new Map contaning only those entries from map1 that also contain (as reversed key/value paar) in map2. */
@@ -190,7 +190,7 @@ public class Compare_Images implements PlugIn {
 			return null;
 		String fullName = dir + fileName;
 		float[][] res = new float[3][3];
-		
+
 		try {
 			Scanner in = new Scanner(new File(fullName));
 			for (int i=0; i<3; i++)
@@ -204,6 +204,6 @@ public class Compare_Images implements PlugIn {
 
 		return res;
 	}
-	
+
 
 }

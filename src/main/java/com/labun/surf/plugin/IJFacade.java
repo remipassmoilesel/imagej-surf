@@ -1,4 +1,4 @@
-
+package com.labun.surf.plugin;
 import static java.lang.Math.cos;
 import static java.lang.Math.round;
 import static java.lang.Math.sin;

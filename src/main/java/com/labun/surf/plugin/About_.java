@@ -1,6 +1,6 @@
+package com.labun.surf.plugin;
 
 import com.labun.surf.Params;
-
 import ij.gui.GenericDialog;
 import ij.plugin.PlugIn;
 
@@ -9,7 +9,8 @@ public class About_ implements PlugIn {
 	String title = "SURF: About";
 		
 	@Override
-	public void run(String arg) {		
+	public void run(String arg) {
+		
 		String text = Params.programVersion + "\n"
 			+ "(c) 2009 Eugen Labun <Labun@gmx.net>\n"
 			+ "www.labun.com/imagej-surf\n" // TODO create this website with info, downloads, etc. !
