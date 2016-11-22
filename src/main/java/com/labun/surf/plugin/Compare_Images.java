@@ -97,9 +97,9 @@ public class Compare_Images implements PlugIn {
 		List<InterestPoint> ipts2 = IJFacade.detectAndDescribeInterestPoints(intImg2, p2);
 
 		begin = System.currentTimeMillis();
-		Map<InterestPoint, InterestPoint> matchedPoints = Matcher.findMathes(ipts1, ipts2);
+		Map<InterestPoint, InterestPoint> matchedPoints = Matcher.findMatches(ipts1, ipts2);
 		if (doReverseComparisonToo) {
-			Map<InterestPoint, InterestPoint> matchedPointsReverse = Matcher.findMathes(ipts2, ipts1);
+			Map<InterestPoint, InterestPoint> matchedPointsReverse = Matcher.findMatches(ipts2, ipts1);
 			matchedPoints = intersection(matchedPoints, matchedPointsReverse);
 		}
 		end = System.currentTimeMillis();

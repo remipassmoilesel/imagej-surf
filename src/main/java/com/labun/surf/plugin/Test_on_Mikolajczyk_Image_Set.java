@@ -74,7 +74,7 @@ public class Test_on_Mikolajczyk_Image_Set implements PlugIn {
 					imp2 = new ImagePlus(getImageFileName(curDir, i));
 					intImg2 = new IntegralImage(imp2.getProcessor(), true);
 					ipts2 = IJFacade.detectAndDescribeInterestPoints(intImg2, params);
-					matchedPoints = Matcher.findMathes(ipts1, ipts2, doReverseComparisonToo);
+					matchedPoints = Matcher.findMatches(ipts1, ipts2, doReverseComparisonToo);
 					count1 = matchedPoints.size();
 
 					h = loadHomographyMatrixFromFile(curDir + "H1to" + i + "p");

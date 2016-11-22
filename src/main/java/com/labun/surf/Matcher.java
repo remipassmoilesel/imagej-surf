@@ -34,12 +34,12 @@ public class Matcher {
 		}
 	}
 
-	public static Map<InterestPoint, InterestPoint> findMathes(List<InterestPoint> ipts1, List<InterestPoint> ipts2, boolean doReverseComparisonToo) {
+	public static Map<InterestPoint, InterestPoint> findMatches(List<InterestPoint> ipts1, List<InterestPoint> ipts2, boolean doReverseComparisonToo) {
 
-		Map<InterestPoint, InterestPoint> matchedPoints = Matcher.findMathes(ipts1, ipts2);
+		Map<InterestPoint, InterestPoint> matchedPoints = Matcher.findMatches(ipts1, ipts2);
 
 		if (doReverseComparisonToo) {
-			Map<InterestPoint, InterestPoint> matchedPointsReverse = Matcher.findMathes(ipts2, ipts1);
+			Map<InterestPoint, InterestPoint> matchedPointsReverse = Matcher.findMatches(ipts2, ipts1);
 
 			// take only those points that matched in the reverse comparison too
 			Map<InterestPoint, InterestPoint> matchedPointsBoth = new HashMap<InterestPoint, InterestPoint>();
@@ -57,7 +57,7 @@ public class Matcher {
 	 * Finds matching points using the sign of laplacian and a linear nearest
 	 * neighbor search.
 	 */
-	public static Map<InterestPoint, InterestPoint> findMathes(List<InterestPoint> ipts1, List<InterestPoint> ipts2) {
+	public static Map<InterestPoint, InterestPoint> findMatches(List<InterestPoint> ipts1, List<InterestPoint> ipts2) {
 		Map<InterestPoint, InterestPoint> res = new HashMap<InterestPoint, InterestPoint>();
 		float distance, bestDistance, secondBest;
 		InterestPoint bestMatch;
