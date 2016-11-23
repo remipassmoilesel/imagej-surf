@@ -159,7 +159,7 @@ public class Params {
 		gd.addCheckbox("Upright SURF (slightly faster, but not rotation invariant)", p.isUpright());
 		gd.addMessage("=============== DISPLAYING RESULTS ==============");
 		//TODO: add Matcher params: best/secondBest value, boolean reverseCheck, float tolerance for comparison with homography
-		// threshold for distance-between-matching-points (outlier/Ausreiﬂer)
+		// threshold for distance-between-matching-points (outlier/Ausreier)
 		gd.addCheckbox("Orientation Vectors (Length shows the strength of I.P.) ", p.isDisplayOrientationVectors());
 		gd.addCheckbox("Descriptor Windows", p.isDisplayDescriptorWindows());
 		gd.addNumericField( "Line Width (1..5) :", p.getLineWidth(), 0 );

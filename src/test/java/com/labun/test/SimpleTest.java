@@ -34,7 +34,7 @@ public class SimpleTest {
             throw new NullPointerException("Unable to find image !");
         }
 
-        final Params surfParams = new Params(4, 4, 0.0001f, 2, false, false, false, 1, false);
+        final Params surfParams = new Params(4, 4, 0.00001f, 2, false, false, false, 1, false);
 
         final List<InterestPoint> points = IJFacade.detectAndDescribeInterestPoints(intImg, surfParams);
 
