@@ -1,6 +1,6 @@
 # SURF algorithm for ImageJ
 
-SURF algorithm created by Eugen Labun, available with Maven.    
+SURF algorithm created by Eugen Labun, packaged to be available with Maven.    
 All under GNU GPL license, thanks a lot !
 
 This algorithm is written in pure Java, so it can be used everywhere there is a Java Virtual Machine (tested with OpenJDK) 
@@ -12,6 +12,8 @@ See: http://labun.com/imagej-surf/
 SURF (Speeded up robust features) is a computer vision algorithm that allow to detect interesting points on an image.
 
 It can be used to detect objects on pictures, or to stitch images between them.
+
+SURF algorithm have been slightly modified and packaged to be available with Maven.
 
 ## Screenshot
 
